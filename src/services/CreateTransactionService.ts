@@ -22,8 +22,6 @@ class CreateTransactionService {
     const transactionsRepository = getCustomRepository(TransactionsRepository);
     const categoriesRepository = getCustomRepository(CategoriesRepository);
 
-    const findCategory = await categoriesRepository.findOrCreate(category);
-
     const checkTransactionType = ['income', 'outcome'].includes(type);
 
     if (!checkTransactionType) {
@@ -37,6 +35,8 @@ class CreateTransactionService {
         throw new AppError('Outcome value cannot be more than total available');
       }
     }
+
+    const findCategory = await categoriesRepository.findOrCreate(category);
 
     const transaction = transactionsRepository.create({
       title,

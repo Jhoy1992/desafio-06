@@ -45,7 +45,7 @@ transactionsRouter.delete('/:id', async (request, response) => {
 
   const { affected } = await transactionsRepository.delete(id);
 
-  return response.json({ NumberOfRecordsDeleted: affected });
+  return response.status(204).json({ NumberOfRecordsDeleted: affected });
 });
 
 transactionsRouter.post(
